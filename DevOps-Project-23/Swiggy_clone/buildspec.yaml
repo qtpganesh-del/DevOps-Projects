@@ -61,7 +61,6 @@ post_build:
         --text "Build status: $CODEBUILD_BUILD_STATUS" \
         --region "ap-south-1"
 
-
 artifacts:
   files:
-    - appspec.yaml
+    - DevOps-Project-23/Swiggy_clone/appspec.yaml
