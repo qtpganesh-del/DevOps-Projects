@@ -13,8 +13,8 @@ phases:
       java: corretto17
   pre_build:
     commands:
-      - echo "Installing dependencies..."
-      - echo "Performing Trivy file scan before building the image..."
+   #   - echo "Installing dependencies..."
+    #  - echo "Performing Trivy file scan before building the image..."
       # - wget https://github.com/aquasecurity/trivy/releases/download/v0.19.2/trivy_0.19.2_Linux-64bit.tar.gz
       # - tar zxvf trivy_0.19.2_Linux-64bit.tar.gz
       # - export PATH=$PATH:$PWD
