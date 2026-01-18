@@ -29,8 +29,22 @@ phases:
       # - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
       # - export SONAR_SCANNER_OPTS="-server"
 
-  build:
-    commands:
+build:
+  commands:
+    - echo "Logging into Docker registry..."
+    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login \
+        -u "$DOCKER_REGISTRY_USERNAME" \
+        --password-stdin "$DOCKER_REGISTRY_URL"
+
+    - echo "Building Docker image..."
+    - docker build -t "$DOCKER_REGISTRY_USERNAME/swiggy:latest" .
+
+    - echo "Pushing Docker image..."
+    - docker push "$DOCKER_REGISTRY_USERNAME/swiggy:latest"
+
+
+  # build:
+   # commands:
       - echo "Running tests..."
       - echo "Building Docker image..."
       # - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
@@ -54,8 +68,8 @@ phases:
 post_build:
   commands:
     - aws ses send-email \
-        --from "madithati123@gmail.com" \
-        --to "madithati123@gmail.com" \
+        --from "qtpganesh@gmail.com" \
+        --to "glkltr@gmail.com" \
         --subject "CodeBuild Status: $CODEBUILD_BUILD_ID" \
         --text "Build status: $CODEBUILD_BUILD_STATUS" \
         --region "us-east-1" # Update with your preferred AWS region
