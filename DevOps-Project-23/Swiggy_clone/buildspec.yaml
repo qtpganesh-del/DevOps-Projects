@@ -25,4 +25,4 @@ phases:
 
 artifacts:
   files:
-    - appspec.yaml
+    - DevOps-Project-23/Swiggy_clone/appspec.yaml
