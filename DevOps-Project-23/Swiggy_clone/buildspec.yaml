@@ -10,26 +10,18 @@ phases:
   pre_build:
     commands:
       - echo "Logging in to Amazon ECR..."
-      - aws ecr get-login-password --region $REGION |
-        docker login --username AWS --password-stdin
-        $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+      - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
 
   build:
     commands:
-      - echo "Building Docker image..."
+      - cd DevOps-Project-23/Swiggy_clone
       - docker build -t $REPO:latest .
-
-      - echo "Tagging image..."
-      - docker tag $REPO:latest
-        $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO:latest
-
-      - echo "Pushing image to ECR..."
-      - docker push
-        $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO:latest
+      - docker tag $REPO:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO:latest
+      - docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO:latest
 
   post_build:
     commands:
-      - echo "Build completed successfully"
+      - echo "Docker image pushed successfully"
 
 artifacts:
   files:
