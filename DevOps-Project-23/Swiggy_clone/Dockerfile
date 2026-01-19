@@ -19,5 +19,7 @@ RUN npm run build
 # Expose port 3000 (or the port your app is configured to listen on)
 EXPOSE 3000
 
+ENV HOST=0.0.0.0
+
 # Start your Node.js server (assuming it serves the React app)
 CMD ["npm", "start"]
